@@ -4,8 +4,13 @@ export interface Request {
     to: number;
 }
 
+export enum ResponseStatus{
+    Success = 'success',
+    Error = 'error',
+}
+
 interface ResponseBase {
-    status: string;
+    status: ResponseStatus;
 }
 
 export interface ResponseSuccessData {
@@ -21,8 +26,10 @@ export interface ResponseErrorData {
 }
 
 export interface ResponseSuccess extends ResponseBase {
+    status: ResponseStatus.Success,
     data: ResponseSuccessData;
 }
 export interface ResponseError extends ResponseBase {
+    status: ResponseStatus.Error,
     data: ResponseErrorData;
 }
