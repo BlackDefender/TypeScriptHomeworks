@@ -1,132 +1,61 @@
-class School {
-  directions:Direction[] = [];
+import Lecturer from "./classes/Lecturer";
+import Student from "./classes/Student";
+import Area from "./classes/Area";
+import School from "./classes/School";
+import Group from "./classes/Group";
+import Grade from "./classes/Grade";
 
-  addDirection(direction:Direction):void {
-    this.directions.push(direction);
-  }
-}
+const panTaras = new Lecturer(
+    'Taras',
+    'Batkovich',
+    'teacher',
+    'ONPU',
+    'JS',
+    'JS/TS',
+    'test',
+);
 
-class Direction {
-  _name:string;
-  levels:Level[] = [];
+const student1 = new Student(
+    'Givi',
+    'Zurabovich',
+    1896,
+);
+const student2 = new Student(
+    'Mykola',
+    'Micheev',
+    1991,
+);
 
-  get name():string {
-    return this._name;
-  }
+const area = new Area('Programming');
 
-  constructor(name:string) {
-    this._name = name;
-  }
+const school = new School('Hillel');
+school.addArea(area);
+school.addLecturer(panTaras);
 
-  addLevel(level:Level):void {
-    this.levels.push(level);
-  }
-}
+const TSGroup = new Group('TS', 'Advanced');
+TSGroup.addStudent(student1);
+TSGroup.addStudent(student2);
 
-class Level {
-  groups:Group[] = [];
-  _name:string;
-  _program:string;
+[true, false, true, true, false].forEach((visit:boolean) => student1.setVisit(visit));
+[true, true, false, true, true].forEach((visit:boolean) => student2.setVisit(visit));
 
-  constructor(name:string, program:string) {
-    this._name = name;
-    this._program = program;
-  }
+[
+    ['test', 100] as Grade,
+    ['test', 95] as Grade,
+    ['test', 80] as Grade,
+    ['test', 97] as Grade,
+    ['test', 50] as Grade,
+].forEach((value:Grade) => student1.setGrade(value[0], value[1]));
 
-  get name():string {
-    return this._name;
-  }
+[
+    ['test', 100] as Grade,
+    ['test', 95] as Grade,
+    ['test', 99] as Grade,
+    ['test', 96] as Grade,
+    ['test', 100] as Grade,
+].forEach((value:Grade) => student2.setGrade(value[0], value[1]));
 
-  get program():string {
-    return this._program;
-  }
+console.log(student1.getPerformanceRating());
+console.log(student2.getPerformanceRating());
 
-  addGroup(group:Group):void {
-    this.groups.push(group);
-  }
-}
-
-class Group {
-  _students:Student[] = [];
-  directionName: string;
-  levelName: string;
-
-  get students():Student[] {
-    return this._students;
-  }
-
-  constructor(directionName:string, levelName:string) {
-    this.directionName = directionName;
-    this.levelName = levelName;
-  }
-
-  addStudent(student:Student):void {
-    this._students.push(student);
-  }
-
-  showPerformance():string[] {
-    const sortedStudents:string[] = this
-        .students
-        .sort((a:Student, b:Student) => b.getPerformanceRating() - a.getPerformanceRating())
-        .map((student:Student) => student.fullName);
-
-    return sortedStudents;
-  }
-}
-
-class Grade{
-  subject:string;
-  value:number;
-  constructor(subject:string, value:number) {
-    this.subject = subject;
-    this.value = value;
-  }
-}
-
-class Student {
-  grades:Grade[] = [];
-  attendance:boolean[] = [];
-  firstName:string;
-  lastName:string;
-  birthYear:number;
-
-  constructor(firstName:string, lastName:string, birthYear:number) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.birthYear = birthYear;
-  }
-
-  get fullName():string {
-    return `${this.lastName} ${this.firstName}`;
-  }
-
-  set fullName(value:string) {
-    [this.lastName, this.firstName] = value.split(" ");
-  }
-
-  get age():number {
-    return new Date().getFullYear() - this.birthYear;
-  }
-
-  setGrade(subject:string, grade:number):void {
-    this.grades.push(new Grade(subject, grade));
-  }
-
-  markAttendance(present:boolean):void {
-    this.attendance.push(present);
-  }
-
-  getPerformanceRating():number {
-    if (this.grades.length === 0) return 0;
-
-    const averageGrade:number = this
-      .grades
-      .map((grade:Grade) => grade.value)
-      .reduce((sum:number, value:number) => sum + value, 0)
-        / this.grades.length;
-
-    const attendancePercentage:number = (this.attendance.filter((present:boolean) => present).length / this.attendance.length) * 100;
-
-    return (averageGrade + attendancePercentage) / 2;
-  }
-}
+TSGroup.showPerformance();
