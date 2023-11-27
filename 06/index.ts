@@ -72,7 +72,7 @@ company.sales.signContract("Fix the button style on the website", 100000);
 company.accounting.paySalary();
 
 console.log(
-  `${company.name} current balance: ${company.accounting.getBalance()}USD`,
+  `${company.name} current balance: ${company.accounting.balance}USD`,
 );
 console.log("");
 console.log("Salary statistics:");

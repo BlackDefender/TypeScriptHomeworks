@@ -1,8 +1,8 @@
 import IEmployee from "./IEmployee";
 
 export default interface IDepartment {
-  name: string;
-  domain: string;
+  readonly name: string;
+  readonly domain: string;
   employees: IEmployee[];
 
   addEmployee(employee: IEmployee): void;

@@ -6,30 +6,30 @@ import IEmployee from "../interfaces/IEmployee";
 
 export default class Accounting extends Department implements IAccounting {
   private budget: number = 0;
-  constructor(
-    public name: string,
-    public domain: string,
-    public company: Company,
+  public constructor(
+    public readonly name: string,
+    public readonly domain: string,
+    public readonly company: Company,
   ) {
     super(name, domain);
   }
 
-  receiveMoneyFromContract(money: number): void {
+  public receiveMoneyFromContract(money: number): void {
     this.budget += money;
   }
 
-  paySalary(): void {
+  public paySalary(): void {
     this.company.employees.forEach((employee: IEmployee): void => {
       this.budget -= employee.salary;
       employee.getSalary(employee.salary);
     });
   }
 
-  getBalance(): number {
+  public get balance(): number {
     return this.budget;
   }
 
-  salaryStatistics(): void {
+  public salaryStatistics(): void {
     const statistics = this.company.allDepartments
       .map(
         (department: IDepartment) =>
@@ -39,7 +39,7 @@ export default class Accounting extends Department implements IAccounting {
     console.log(statistics);
   }
 
-  get totalSalary(): number {
+  public get totalSalary(): number {
     return this.employees.reduce(
       (sum, employee: IEmployee) => sum + employee.salary,
       0,

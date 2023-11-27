@@ -7,7 +7,7 @@ import Employee from "../classes/Employee";
 import IContract from "./IContract";
 
 export default interface ICompany {
-  name: string;
+  readonly name: string;
   allDepartments: IDepartment[];
   employees: IEmployee[];
   branch: IDepartment;

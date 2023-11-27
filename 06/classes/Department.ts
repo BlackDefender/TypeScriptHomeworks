@@ -5,9 +5,9 @@ import IEmployee from "../interfaces/IEmployee";
 export default class Department implements IDepartment {
   public employees: Employee[] = [];
 
-  constructor(
-    public name: string,
-    public domain: string,
+  public constructor(
+    public readonly name: string,
+    public readonly domain: string,
   ) {}
 
   public addEmployee(employee: Employee): void {
@@ -26,7 +26,7 @@ export default class Department implements IDepartment {
     return removedEmployees[0];
   }
 
-  get totalSalary(): number {
+  public get totalSalary(): number {
     return this.employees.reduce(
       (sum, employee: IEmployee) => sum + employee.salary,
       0,

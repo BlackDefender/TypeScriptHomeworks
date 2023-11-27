@@ -4,9 +4,9 @@ import IEmployee from "../interfaces/IEmployee";
 
 export default class Employee implements IEmployee {
   private wallet: number = 0;
-  constructor(
-    public firstName: string,
-    public lastName: string,
+  public constructor(
+    public readonly firstName: string,
+    public readonly lastName: string,
     public salary: number,
     public bankAccount: string,
     public department: IDepartment,
@@ -23,18 +23,18 @@ export default class Employee implements IEmployee {
     this.wallet += money;
   }
 
-  get fullName(): string {
+  public get fullName(): string {
     return `${this.firstName} ${this.lastName}`;
   }
 
-  goToUnpaidVacation(days: number): void {
+  public goToUnpaidVacation(days: number): void {
     this.status = EmployeeStatus.Vacation;
     setTimeout((): void => {
       this.status = EmployeeStatus.Work;
     }, days * 1000); // one day per second
   }
 
-  goToVacation(days: number): void {
+  public goToVacation(days: number): void {
     this.status = EmployeeStatus.UnpaidVacation;
     setTimeout((): void => {
       this.status = EmployeeStatus.Work;

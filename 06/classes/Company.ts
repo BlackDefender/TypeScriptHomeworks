@@ -7,6 +7,7 @@ import IDepartment from "../interfaces/IDepartment";
 import ISales from "../interfaces/ISales";
 import ProductionDepartment from "./ProductionDepartment";
 import IContract from "../interfaces/IContract";
+import isProductionDepartment from "../helpers/isProductionDepartment";
 
 export default class Company implements ICompany {
   public allDepartments: IDepartment[] = [];
@@ -15,7 +16,7 @@ export default class Company implements ICompany {
   public accounting!: IAccounting;
   public sales!: ISales;
 
-  constructor(public name: string) {}
+  public constructor(public readonly name: string) {}
 
   public addDepartment(department: IProductionDepartment): void {
     this.allDepartments.push(department);
@@ -57,7 +58,7 @@ export default class Company implements ICompany {
 
   public performContract(contract: IContract): void {
     this.allDepartments.forEach((department: IDepartment): void => {
-      if (department instanceof ProductionDepartment) {
+      if (isProductionDepartment(department)) {
         department.performContractWork();
       }
     });

@@ -7,7 +7,7 @@ export default class ProductionDepartment
   extends Department
   implements IProductionDepartment
 {
-  performContractWork(): void {
+  public performContractWork(): void {
     this.employees
       .filter((employee: IEmployee) => employee.status === EmployeeStatus.Work)
       .forEach((employee: IEmployee) => employee.doSomeJob());

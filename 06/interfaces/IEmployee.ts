@@ -2,8 +2,8 @@ import IDepartment from "./IDepartment";
 import EmployeeStatus from "../enums/EmployeeStatus";
 
 export default interface IEmployee {
-  firstName: string;
-  lastName: string;
+  readonly firstName: string;
+  readonly lastName: string;
   salary: number;
   bankAccount: string;
   department: IDepartment;

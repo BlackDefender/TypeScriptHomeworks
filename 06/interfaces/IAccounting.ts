@@ -4,5 +4,5 @@ export default interface IAccounting extends IDepartment {
   receiveMoneyFromContract(money: number): void;
   paySalary(): void;
   salaryStatistics(): void;
-  getBalance(): number;
+  get balance(): number;
 }
