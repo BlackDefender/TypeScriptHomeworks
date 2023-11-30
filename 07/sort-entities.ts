@@ -7,12 +7,14 @@ interface IHasId {
     id: string;
 }
 
-const sortEntities = (arr: Array<IHasId>, sortOrder: ESortOrder = ESortOrder.ASC):void => {
+const sortEntities = <T extends IHasId>(arr: Array<T>, sortOrder: ESortOrder = ESortOrder.ASC):T[] => {
+    const newArray:T[] = [...arr];
     if (sortOrder === ESortOrder.ASC) {
-        arr.sort((a:IHasId, b:IHasId):number => a.id.localeCompare(b.id));
+        newArray.sort((a:IHasId, b:IHasId):number => a.id.localeCompare(b.id));
     } else {
-        arr.sort((a:IHasId, b:IHasId):number => b.id.localeCompare(a.id));
+        newArray.sort((a:IHasId, b:IHasId):number => b.id.localeCompare(a.id));
     }
+    return newArray;
 };
 
 
@@ -31,15 +33,15 @@ const dataDesc:TestClass[] = new Array(10).fill(null).map(() => new TestClass())
 console.log('ASC');
 console.log('Before:');
 console.log(dataAsc);
-sortEntities(dataAsc, ESortOrder.ASC);
 console.log('After:');
-console.log(dataAsc);
+console.log(sortEntities<TestClass>(dataAsc, ESortOrder.ASC));
 
 console.log('\n--------\n');
 
 console.log('DESC');
 console.log('Before:');
 console.log(dataDesc);
-sortEntities(dataDesc, ESortOrder.DESC);
 console.log('After:');
-console.log(dataDesc);
+console.log(sortEntities<TestClass>(dataDesc, ESortOrder.DESC));
+
+//sortEntities<number>([1,2,3]); <- error
