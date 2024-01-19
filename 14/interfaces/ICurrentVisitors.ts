@@ -5,4 +5,5 @@ export default interface ICurrentVisitors {
     add(ticket: ITicket, visitor: IClient): void;
     remove(ticket: ITicket): void;
     get allVisitors(): IClient[];
+    get numberOfVisitors(): number;
 }

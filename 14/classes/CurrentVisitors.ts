@@ -28,6 +28,10 @@ export default class CurrentVisitors implements ICurrentVisitors {
         }
     }
 
+    get numberOfVisitors(): number {
+        return this.tickets.length;
+    }
+
     get allVisitors(): IClient[] {
         return Array.from(this.visitors, ([key, value]) => value);
     }

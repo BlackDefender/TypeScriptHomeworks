@@ -4,4 +4,5 @@ export default interface IAccounting {
     buyFoodForAnimals(price: number): void;
     buyExpendableMaterials(price: number): void;
     statistics(): void;
+    get currentBudget(): number;
 }

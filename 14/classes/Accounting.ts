@@ -33,4 +33,7 @@ export default class Accounting implements IAccounting {
         console.log(`Current budget is ${this.budget}`);
     }
 
+    get currentBudget(): number {
+        return this.budget;
+    }
 }
