@@ -5,7 +5,11 @@ import Ticket from "../classes/Ticket";
 import ESpecies from "../custom-types/ESpecies";
 
 describe('Zoo', () => {
-    const zoo = new Zoo();
+    let zoo: Zoo;
+
+    beforeEach(() => {
+        zoo = new Zoo();
+    });
 
     it('expect to be instance of Zoo', () => {
         expect(zoo).toBeInstanceOf(Zoo);
